@@ -21,7 +21,3 @@ def edge_detection(image_array):
     edgeX = convolve2d(mean_image, kernelX, mode='same', boundary='symm')
     edgeMAG = np.sqrt(edgeX**2 + edgeY**2)
     return edgeMAG
-
-# Load the color image
-file_path = '/content/IMG_5288.jpeg'  # Replace with your actual image path
-image_array = load_image(file_path)
