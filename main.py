@@ -12,11 +12,12 @@ image_array = load_image(file_path)  # Load image
 # Step 2: Perform edge detection on the image
 edge_image = edge_detection(image_array)  # Detect edges in the image
 
-# Step 3: Apply median filter to reduce noise using ball(3) as structuring element
-clean_image = median(edge_image, ball(3))  # You can experiment with ball's radius (3 in this case)
+# Step 3: Apply median filter to reduce noise using ball(5) as structuring element
+clean_image = median(edge_image, ball(5))  # Experiment with the radius (3 -> 5)
 
 # Step 4: Convert the edge-detected image to binary using a threshold value
-threshold = 150  # You can experiment with this threshold based on the histogram
+# Automatically determine a threshold based on the image's pixel range
+threshold = np.mean(clean_image)  # Using the mean of the edge image as a threshold
 edge_binary = clean_image > threshold  # Create binary image (True for edges, False otherwise)
 
 # Step 5: Display the binary edge-detected image
