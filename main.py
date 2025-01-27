@@ -1,5 +1,3 @@
-from image_utils import load_image , edge_detection
-
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
@@ -7,19 +5,25 @@ from image_utils import load_image, edge_detection  # Import functions from imag
 from skimage.filters import median
 from skimage.morphology import ball  # Used for noise suppression with ball structuring element
 
-file_path = '/content/IMG_5288.jpeg' 
-image_array = load_image(file_path)
+# Step 1: Load the color image using the load_image function from image_utils
+file_path = '/content/IMG_5288.jpeg'  # Update with the correct image path
+image_array = load_image(file_path)  # Load image
 
-# Perform edge detection
-edge_image = edge_detection(image_array)
+# Step 2: Perform edge detection on the image
+edge_image = edge_detection(image_array)  # Detect edges in the image
 
-# Apply median filter to reduce noise using ball(3) as structuring element
+# Step 3: Apply median filter to reduce noise using ball(3) as structuring element
 clean_image = median(edge_image, ball(3))  # You can experiment with ball's radius (3 in this case)
-    
-# Convert the edge image to binary 
-threshold = 150  #based on the histogram
-edge_binary = clean_image > threshold  # (True for edges, False otherwise)
 
-# Save the binary edge-detected image as a .png file
-edge_image = Image.fromarray(edge_binary)
-edge_image.save('my_edges.png')
+# Step 4: Convert the edge-detected image to binary using a threshold value
+threshold = 150  # You can experiment with this threshold based on the histogram
+edge_binary = clean_image > threshold  # Create binary image (True for edges, False otherwise)
+
+# Step 5: Display the binary edge-detected image
+plt.imshow(edge_binary, cmap='gray')  # Display image in grayscale
+plt.axis('off')  # Turn off the axis for cleaner visualization
+plt.show()  # Show the image
+
+# Step 6: Save the binary edge-detected image as a .png file
+edge_image = Image.fromarray((edge_binary * 255).astype(np.uint8))  # Convert boolean to 0-255
+edge_image.save('my_edges.png')  # Save the result as 'my_edges.png'
