@@ -2,8 +2,8 @@ from PIL import Image
 import numpy as np
 from scipy.ndimage import convolve
 
-def load_image(lena.jpg):
-    image = Image.open(lena.jpg)
+def load_image(path):
+    image = Image.open(path)
     image_array = np.array(image)
     return image_array
 
