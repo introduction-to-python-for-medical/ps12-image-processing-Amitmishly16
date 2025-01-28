@@ -1,6 +1,6 @@
 from PIL import Image
 import numpy as np
-from scipy.signal import convolve2d
+from scipy.ndimage import convolve
 
 def load_image(lena.jpg):
     image = Image.open(lena.jpg)
@@ -14,8 +14,8 @@ def edge_detection(image_array):
     kernelX = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])  
     
     # Apply the filters to the grayscale image
-    edgeY = convolve2d(lena_mean, kernelY)  # Vertical edges
-    edgeX = convolve2d(lena_mean, kernelX)  # Horizontal edges
+    edgeY = convolve(lena_mean, kernelY)  # Vertical edges
+    edgeX = convolve(lena_mean, kernelX)  # Horizontal edges
     
     # Calculate edgeMAG
     edgeMAG = np.sqrt(edgeX**2 + edgeY**2)
