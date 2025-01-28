@@ -19,7 +19,9 @@ def save_image (edge_binary):
     edge_image = Image.fromarray((edge_binary * 255).astype(np.uint8)) 
     edge_image.save('my_edges.png') 
 
-image_array = load_image('lena.jpeg') #creates an image array
+path = 
+
+image_array = load_image(path) #creates an image array
 
 clean_image = noise_suppression(image_array) #cleans the array
 
